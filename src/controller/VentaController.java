@@ -152,6 +152,6 @@ public class VentaController {
      * - Solo verifica que exista en memoria
      */
     public boolean isListaArchivosEmpty() {
-        return ArchivoVentasRepository.LISTA_ARCHIVOS != null;
+        return ArchivoVentasRepository.LISTA_ARCHIVOS.isEmpty();
     }
 }

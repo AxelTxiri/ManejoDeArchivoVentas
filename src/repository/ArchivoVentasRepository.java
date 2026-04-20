@@ -204,7 +204,7 @@ public class ArchivoVentasRepository {
             File archivo = LISTA_ARCHIVOS.get(seleccionArchivo - 1);
             Scanner scanner = new Scanner(archivo);
 
-            if (archivo.exists()) {
+            if (archivo.exists() && scanner.hasNextLine()) {
                 System.out.println("Ventas registradas en el archivo '" + archivo.getName() + "':");
                 while (scanner.hasNextLine()) {
                     String linea = scanner.nextLine();
@@ -219,6 +219,9 @@ public class ArchivoVentasRepository {
                 }
                 System.out.println();
                 scanner.close();
+            }else {
+                System.out.println("El archivo '" + archivo.getName() + "' está vacío o no existe.");
+                System.out.println();
             }
         } catch (IOException e) {
             System.out.println("Ocurrió un error al leer el archivo.");

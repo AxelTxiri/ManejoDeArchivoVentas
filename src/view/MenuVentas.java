@@ -88,7 +88,7 @@ public class MenuVentas {
                     System.out.println("Opcion 3: Registrar venta.");
 
                     // Se verifica si hay archivos disponibles
-                    if (ventaController.isListaArchivosEmpty()) {
+                    if (!ventaController.isListaArchivosEmpty()) {
                         int seleccionArchivo = 0;
                         String nombreProducto = "";
                         int cantidad = 0;
@@ -115,6 +115,7 @@ public class MenuVentas {
                             scanner.nextLine();
                             System.out.println("Ingrese el precio unitario:");
                             precioUnitario = scanner.nextDouble();
+                            scanner.nextLine();
 
                             // Se crea el objeto Venta con los datos ingresados
                             Venta venta = new Venta(nombreProducto, cantidad, precioUnitario);
@@ -134,7 +135,7 @@ public class MenuVentas {
                     System.out.println("Opcion 4: Leer archivo de ventas.");
 
                     // Se verifica si hay archivos disponibles para leer
-                    if (ventaController.isListaArchivosEmpty()) {
+                    if (!ventaController.isListaArchivosEmpty()) {
                         int seleccionArchivo = 0;
 
                         // Se muestra la lista de archivos disponibles para leer
@@ -161,7 +162,7 @@ public class MenuVentas {
                 case 5:
                     System.out.println("Opcion 5: Calcular las ventas.");
 
-                    if (ventaController.isListaArchivosEmpty()) {
+                    if (!ventaController.isListaArchivosEmpty()) {
                         int seleccionArchivo = 0;
                         System.out.println("Seleccione un archivo para calcular las ventas registradas:");
                         ventaController.listaArchivos();
@@ -184,7 +185,7 @@ public class MenuVentas {
                     // Opción para calcular el total de ventas de un archivo
                     System.out.println("Opcion 6: Respaldar archivo ventas.");
 
-                    if (ventaController.isListaArchivosEmpty()) {
+                    if (!ventaController.isListaArchivosEmpty()) {
                         int seleccionArchivo = 0;
                         System.out.println("Seleccione un archivo para respaldar:");
                         ventaController.listaArchivos();
@@ -210,7 +211,7 @@ public class MenuVentas {
                     // Opción para eliminar un archivo de ventas
                     System.out.println("Opcion 7: Eliminar archivo de ventas.");
 
-                    if (ventaController.isListaArchivosEmpty()) {
+                    if (!ventaController.isListaArchivosEmpty()) {
                         int seleccionArchivo = 0;
                         System.out.println("Seleccione un archivo para eliminar:");
                         ventaController.listaArchivos();
@@ -227,6 +228,8 @@ public class MenuVentas {
                         }
                     } else {
                         System.out.println("No se encontraron archivos de ventas para eliminar.");
+                        System.out.println();
+                        scanner.nextLine();
                     }
 
                     break;
@@ -239,6 +242,8 @@ public class MenuVentas {
                     System.out.println("Opcion no valida. Por favor, ingrese un numero del 1 al 8.");
                     System.out.println();
             }
+
+            option = 0; // Reinicia la opción para evitar que se ejecute el menú sin una nueva selección
         } while (option != 8);
         scanner.close();
     }
@@ -249,8 +254,8 @@ public class MenuVentas {
      * return el número ingresado por el usuario o -1 si ocurre un error
      */
     public int leerOpcion() {
+        Scanner scanner = new Scanner(System.in);
         try {
-            Scanner scanner = new Scanner(System.in);
 
             // Se intenta leer un número entero ingresado por el usuario
             int option = scanner.nextInt();
@@ -264,6 +269,7 @@ public class MenuVentas {
             // Se ejecuta si el usuario no ingresa un número válido (ej: letras)
             System.out.println("ERROR: Entrada no valida. Por favor, ingrese un numero valido.");
             System.out.println();
+            scanner.nextLine();
 
             // Se retorna -1 para indicar que hubo un error
             return -1;
