@@ -56,8 +56,6 @@ public class VentaController {
      */
     public void abrirArchivos() {
         archivoVentasRepository.abrirArchivos();
-
-        archivoVentasRepository.abrirArchivos();
     }
 
     /**
@@ -103,8 +101,6 @@ public class VentaController {
      */
     public void calcularVentas(int seleccionArchivo) {
         archivoVentasRepository.calcularVentas(seleccionArchivo);
-
-        archivoVentasRepository.calcularVentas(seleccionArchivo);
     }
 
     /**
@@ -143,8 +139,6 @@ public class VentaController {
      * - El método se ejecuta dos veces, lo que duplica la salida en consola.
      */
     public void listaArchivos() {
-        archivoVentasRepository.listaArchivos();
-
         archivoVentasRepository.listaArchivos();
     }
 
