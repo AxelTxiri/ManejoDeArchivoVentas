@@ -26,14 +26,13 @@ import repository.ArchivoVentasRepository;
  * Aquí se muestra el menú y se gestionan las opciones del usuario.
  */
 public class MenuVentas {
+    static final Scanner SCANNER = new Scanner(System.in);
 
     /**
      * Método principal del menú.
      * Muestra las opciones y controla el flujo del programa.
      */
     public void showMenu() {
-        // Scanner principal para leer datos del usuario
-        Scanner scanner = new Scanner(System.in);
         // Instancia del controlador para ejecutar acciones
         VentaController ventaController = new VentaController();
         // Variable que guarda la opción seleccionada por el usuario
@@ -73,7 +72,7 @@ public class MenuVentas {
 
                     // Se pide el nombre del archivo al usuario (sin extensión)
                     System.out.println("Ingrese el nombre del archivo de ventas (sin extension):");
-                    nombreArchivo = scanner.next();
+                    nombreArchivo = SCANNER.nextLine();
 
                     // Se envía el nombre al controlador para crear el archivo
                     ventaController.crearArchivoVentas(nombreArchivo);
@@ -109,13 +108,13 @@ public class MenuVentas {
                         } else {
                             // Datos de la venta
                             System.out.println("Ingrese el nombre del producto:");
-                            nombreProducto = scanner.nextLine();
+                            nombreProducto = SCANNER.nextLine();
                             System.out.println("Ingrese la cantidad:");
-                            cantidad = scanner.nextInt();
-                            scanner.nextLine();
+                            cantidad = SCANNER.nextInt();
+                            SCANNER.nextLine();
                             System.out.println("Ingrese el precio unitario:");
-                            precioUnitario = scanner.nextDouble();
-                            scanner.nextLine();
+                            precioUnitario = SCANNER.nextDouble();
+                            SCANNER.nextLine();
 
                             // Se crea el objeto Venta con los datos ingresados
                             Venta venta = new Venta(nombreProducto, cantidad, precioUnitario);
@@ -229,7 +228,6 @@ public class MenuVentas {
                     } else {
                         System.out.println("No se encontraron archivos de ventas para eliminar.");
                         System.out.println();
-                        scanner.nextLine();
                     }
 
                     break;
@@ -245,7 +243,7 @@ public class MenuVentas {
 
             option = 0; // Reinicia la opción para evitar que se ejecute el menú sin una nueva selección
         } while (option != 8);
-        scanner.close();
+        SCANNER.close();
     }
 
     /**
@@ -254,14 +252,13 @@ public class MenuVentas {
      * return el número ingresado por el usuario o -1 si ocurre un error
      */
     public int leerOpcion() {
-        Scanner scanner = new Scanner(System.in);
         try {
 
             // Se intenta leer un número entero ingresado por el usuario
-            int option = scanner.nextInt();
+            int option = SCANNER.nextInt();
 
             // Se limpia el buffer (salto de línea pendiente)
-            scanner.nextLine();
+            SCANNER.nextLine();
 
             // Se retorna la opción ingresada
             return option;
@@ -269,7 +266,7 @@ public class MenuVentas {
             // Se ejecuta si el usuario no ingresa un número válido (ej: letras)
             System.out.println("ERROR: Entrada no valida. Por favor, ingrese un numero valido.");
             System.out.println();
-            scanner.nextLine();
+            SCANNER.nextLine();
 
             // Se retorna -1 para indicar que hubo un error
             return -1;
