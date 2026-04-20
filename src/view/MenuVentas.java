@@ -19,6 +19,7 @@ import controller.VentaController;
  * Representa los datos de una venta (producto, cantidad, precio).
  */
 import model.Venta;
+import repository.ArchivoVentasRepository;
 
 /**
  * Clase que representa el menú del sistema (interfaz de usuario).
@@ -100,22 +101,27 @@ public class MenuVentas {
                         // Selección del archivo donde se registrará la venta
                         System.out.println("Ingrese el numero del archivo:");
                         seleccionArchivo = leerOpcion();
-                        scanner.nextLine();
 
-                        // Datos de la venta
-                        System.out.println("Ingrese el nombre del producto:");
-                        nombreProducto = scanner.nextLine();
-                        System.out.println("Ingrese la cantidad:");
-                        cantidad = scanner.nextInt();
-                        scanner.nextLine();
-                        System.out.println("Ingrese el precio unitario:");
-                        precioUnitario = scanner.nextDouble();
+                        if (seleccionArchivo < 1 || seleccionArchivo - 1 >= ArchivoVentasRepository.LISTA_ARCHIVOS.size()) {
+                            System.out.println("Opcion no valida. Por favor, ingrese un numero del 1 al " + ArchivoVentasRepository.LISTA_ARCHIVOS.size() + ".");
+                            System.out.println();
+                            break;
+                        } else {
+                            // Datos de la venta
+                            System.out.println("Ingrese el nombre del producto:");
+                            nombreProducto = scanner.nextLine();
+                            System.out.println("Ingrese la cantidad:");
+                            cantidad = scanner.nextInt();
+                            scanner.nextLine();
+                            System.out.println("Ingrese el precio unitario:");
+                            precioUnitario = scanner.nextDouble();
 
-                        // Se crea el objeto Venta con los datos ingresados
-                        Venta venta = new Venta(nombreProducto, cantidad, precioUnitario);
+                            // Se crea el objeto Venta con los datos ingresados
+                            Venta venta = new Venta(nombreProducto, cantidad, precioUnitario);
 
-                        // Se envía al controlador para registrar la venta en el archivo seleccionado
-                        ventaController.registrarVenta(seleccionArchivo, venta);
+                            // Se envía al controlador para registrar la venta en el archivo seleccionado
+                            ventaController.registrarVenta(seleccionArchivo, venta);
+                        }
                     } else {
                         // No hay archivos disponibles para registrar la venta
                         System.out.println("No se encontraron archivos de ventas donde registrar la venta.");
@@ -137,9 +143,15 @@ public class MenuVentas {
                         System.out.println("Ingrese el numero del archivo:");
                         seleccionArchivo = leerOpcion();
 
-                        // Se envía la selección al controlador para leer el archivo y mostrar su
-                        // contenido
-                        ventaController.leerArchivoVentas(seleccionArchivo);
+                        if (seleccionArchivo < 1 || seleccionArchivo - 1 >= ArchivoVentasRepository.LISTA_ARCHIVOS.size()) {
+                            System.out.println("Opcion no valida. Por favor, ingrese un numero del 1 al " + ArchivoVentasRepository.LISTA_ARCHIVOS.size() + ".");
+                            System.out.println();
+                            break;
+                        } else {
+                            // Se envía la selección al controlador para leer el archivo y mostrar su
+                            // contenido
+                            ventaController.leerArchivoVentas(seleccionArchivo);
+                        }
                     } else {
                         // Mensaje si no hay archivos disponibles
                         System.out.println("No se encontraron archivos de ventas para leer.");
@@ -156,9 +168,16 @@ public class MenuVentas {
                         System.out.println("Ingrese el numero del archivo:");
                         seleccionArchivo = leerOpcion();
 
-                        ventaController.calcularVentas(seleccionArchivo);
+                        if (seleccionArchivo < 1 || seleccionArchivo - 1 >= ArchivoVentasRepository.LISTA_ARCHIVOS.size()) {
+                            System.out.println("Opcion no valida. Por favor, ingrese un numero del 1 al " + ArchivoVentasRepository.LISTA_ARCHIVOS.size() + ".");
+                            System.out.println();
+                            break;
+                        } else {
+                            ventaController.calcularVentas(seleccionArchivo);
+                        }
                     } else {
                         System.out.println("No se encontraron archivos de ventas para calcular las ventas.");
+                        System.out.println();
                     }
                     break;
                 case 6:
@@ -172,9 +191,15 @@ public class MenuVentas {
                         System.out.println("Ingrese el numero del archivo:");
                         seleccionArchivo = leerOpcion();
 
-                        // Se envía la selección al controlador para calcular el total de ventas del
-                        // archivo seleccionado
-                        ventaController.respaldarArchivoVentas(seleccionArchivo);
+                        if (seleccionArchivo < 1 || seleccionArchivo - 1 >= ArchivoVentasRepository.LISTA_ARCHIVOS.size()) {
+                            System.out.println("Opcion no valida. Por favor, ingrese un numero del 1 al " + ArchivoVentasRepository.LISTA_ARCHIVOS.size() + ".");
+                            System.out.println();
+                            break;
+                        } else {
+                            // Se envía la selección al controlador para calcular el total de ventas del
+                            // archivo seleccionado
+                            ventaController.respaldarArchivoVentas(seleccionArchivo);
+                        }
                     } else {
                         // Mensaje si no hay archivos disponibles para respaldar
                         System.out.println("No se encontraron archivos de ventas para respaldar.");
@@ -192,8 +217,14 @@ public class MenuVentas {
                         System.out.println("Ingrese el numero del archivo:");
                         seleccionArchivo = leerOpcion();
 
-                        // Se envía la selección al controlador para eliminar el archivo seleccionado
-                        ventaController.eliminarArchivoVentas(seleccionArchivo);
+                        if (seleccionArchivo < 1 || seleccionArchivo - 1 >= ArchivoVentasRepository.LISTA_ARCHIVOS.size()) {
+                            System.out.println("Opcion no valida. Por favor, ingrese un numero del 1 al " + ArchivoVentasRepository.LISTA_ARCHIVOS.size() + ".");
+                            System.out.println();
+                            break;
+                        } else {
+                            // Se envía la selección al controlador para eliminar el archivo seleccionado
+                            ventaController.eliminarArchivoVentas(seleccionArchivo);
+                        }
                     } else {
                         System.out.println("No se encontraron archivos de ventas para eliminar.");
                     }
